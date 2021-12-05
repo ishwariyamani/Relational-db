@@ -1,0 +1,219 @@
+-- Table: public.admins
+
+-- DROP TABLE public.admins;
+
+CREATE TABLE public.admins
+(
+    admin_id integer NOT NULL,
+    first_name character varying COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying COLLATE pg_catalog."default" NOT NULL,
+    credential_id integer COLLATE pg_catalog."default" NOT NULL,
+    contact_number character varying COLLATE pg_catalog."default" NOT NULL,
+    address character varying COLLATE pg_catalog."default",
+    emergency_number character varying COLLATE pg_catalog."default",
+    emergency_contact_number_name character varying COLLATE pg_catalog."default",
+    CONSTRAINT admins_pkey PRIMARY KEY (admin_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.admins
+    OWNER to postgres;
+	
+-- Table: public.attendance
+
+-- DROP TABLE public.attendance;
+
+CREATE TABLE public.attendance
+(
+    attendance_id integer NOT NULL,
+    session_id integer NOT NULL,
+    student_id integer NOT NULL,
+    present boolean NOT NULL,
+    CONSTRAINT attendance_pkey PRIMARY KEY (attendance_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.attendance
+    OWNER to postgres;
+	
+-- Table: public.credentials
+
+-- DROP TABLE public.credentials;
+
+CREATE TABLE public.credentials
+(
+    credential_id integer NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    credential_description_id integer COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT credentials_pkey PRIMARY KEY (credential_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.credentials
+    OWNER to postgres;
+	
+	
+-- Table: public.group
+
+-- DROP TABLE public."group";
+
+CREATE TABLE public."group"
+(
+    group_id integer NOT NULL,
+    group_discription character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT group_pkey PRIMARY KEY (group_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."group"
+    OWNER to postgres;
+	
+
+-- Table: public.intake
+
+-- DROP TABLE public.intake;
+
+CREATE TABLE public.intake
+(
+    intake_id integer NOT NULL,
+    intake_description character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT intake_pkey PRIMARY KEY (intake_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.intake
+    OWNER to postgres;
+	
+	
+-- Table: public.programs
+
+-- DROP TABLE public.programs;
+
+CREATE TABLE public.programs
+(
+    program_id integer NOT NULL,
+    program_description character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT programs_pkey PRIMARY KEY (program_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.programs
+    OWNER to postgres;
+	
+	
+-- Table: public.session
+
+-- DROP TABLE public.session;
+
+CREATE TABLE public.session
+(
+    session_id integer NOT NULL,
+    session_time time with time zone NOT NULL,
+    room_number integer NOT NULL,
+    subject_id integer NOT NULL,
+    group_id integer NOT NULL,
+    teacher_id integer NOT NULL,
+    CONSTRAINT session_pkey PRIMARY KEY (session_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.session
+    OWNER to postgres;
+	
+	
+-- Table: public.student
+
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student
+(
+    student_id integer NOT NULL,
+    first_name character varying COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying COLLATE pg_catalog."default" NOT NULL,
+    date_of_birth date NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    contact_number integer NOT NULL,
+    country character varying COLLATE pg_catalog."default" NOT NULL,
+    address character varying COLLATE pg_catalog."default" NOT NULL,
+    emergency_contact_number character varying COLLATE pg_catalog."default" NOT NULL,
+    emergency_contact_number_name character varying COLLATE pg_catalog."default" NOT NULL,
+    group_id integer NOT NULL,
+    credentials integer NOT NULL,
+    intake_id integer NOT NULL,
+    CONSTRAINT student_pkey PRIMARY KEY (student_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.student
+    OWNER to postgres;
+	
+-- Table: public.subjects
+
+-- DROP TABLE public.subjects;
+
+CREATE TABLE public.subjects
+(
+    subject_id integer NOT NULL,
+    subject_name character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT subjects_pkey PRIMARY KEY (subject_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.subjects
+    OWNER to postgres;
+	
+
+-- Table: public.teacher
+
+-- DROP TABLE public.teacher;
+
+CREATE TABLE public.teacher
+(
+    teacher_id integer NOT NULL,
+    first_name character varying COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying COLLATE pg_catalog."default" NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    contact_number integer NOT NULL,
+    payment integer NOT NULL,
+    epita_email_id integer NOT NULL,
+    address character varying COLLATE pg_catalog."default" NOT NULL,
+    emergency_contact_number integer NOT NULL,
+    emergency_contact_number_name character varying NOT NULL,
+    CONSTRAINT teacher_pkey PRIMARY KEY (teacher_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.teacher
+    OWNER to postgres;
+	
+session
+INSERT INTO public.session(
+	session_id, session_time, room_number, subject_id, group_id, teacher_id)
+	VALUES (1, '2021-11-25 09:00:00'::timestamp,606, 1, 1, 1);
+INSERT INTO public.session(
+	session_id, session_time, room_number, subject_id, group_id, teacher_id)
+	VALUES (2, '2021-11-25 09:00:00'::timestamp,605, 2, 2, 2);
+INSERT INTO public.session(
+	session_id, session_time, room_number, subject_id, group_id, teacher_id)
+	VALUES (3, '2021-11-25 14:00:00'::timestamp,604, 3, 3, 2);
+	
+attendance
+INSERT INTO public.attendance(
+	attendance_id, session_id, student_id, present)
+	VALUES (1, 1, 1, true);
+INSERT INTO public.attendance(
+	attendance_id, session_id, student_id, present)
+	VALUES (2, 1, 2, true);
+INSERT INTO public.attendance(
+	attendance_id, session_id, student_id, present)
+	VALUES (3, 1, 3, False);

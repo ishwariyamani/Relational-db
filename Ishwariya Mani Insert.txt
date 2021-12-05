@@ -1,0 +1,127 @@
+admins
+INSERT INTO public.admins(
+	admin_id, first_name, last_name, credential_id, contact_number, address, emergency_number, emergency_contact_number_name)
+	VALUES (1, 'Jenoh', 'Johsnon', 1, 123456789, '12 abb', 13456789, 'abc');
+INSERT INTO public.admins(
+	admin_id, first_name, last_name, credential_id, contact_number, address, emergency_number, emergency_contact_number_name)
+	VALUES (2, 'Johsnon', 'Jenoh', 2, 123456789, '12 abb', 13456789, 'abc');
+INSERT INTO public.admins(
+	admin_id, first_name, last_name, credential_id, contact_number, address, emergency_number, emergency_contact_number_name)
+	VALUES (3, 'Nadheesh', 'joel', 3, 123456789, '12 abb', 13456789, 'abc');
+	
+student
+INSERT INTO public.student(
+	student_id, first_name, last_name, date_of_birth, email, contact_number, country, address, emergency_contact_number, emergency_contact_number_name, group_id, credentials, intake_id)
+	VALUES (1, 'Ishwriya', 'Mani', '1997-04-30', 'ishwariyamani@gmail.com',12345678, 'India', '25 avn newburn', 123456789, 'Abc', 1, 4, 1);
+INSERT INTO public.student(
+	student_id, first_name, last_name, date_of_birth, email, contact_number, country, address, emergency_contact_number, emergency_contact_number_name, group_id, credentials, intake_id)
+	VALUES (2, 'Mani', 'Ishwriya', '1997-04-30', 'maniishwariya@gmail.com',1234567,'India', '25 avn newburn', 123456789, 'Abc', 2, 5, 2);
+INSERT INTO public.student(
+	student_id, first_name, last_name, date_of_birth, email, contact_number, country, address, emergency_contact_number, emergency_contact_number_name, group_id, credentials, intake_id)
+	VALUES (3, 'Queen', 'mary', '1997-04-30', 'queenmary@gmail.com', 1234567,'China', '25 avn newburn', 123456789, 'Abc', 3, 5, 2);
+	
+	
+INSERT INTO public.teacher(
+	teacher_id, first_name, last_name, email, contact_number, payment, epita_email_id, address, emergency_contact_number, emergency_contact_number_name)
+	VALUES (1,'Osman', 'mohamed', 'osmanmohmad@gmail', 1234567, 25, 7, '5 abc', 123456, 'abc');
+INSERT INTO public.teacher(
+	teacher_id, first_name, last_name, email, contact_number, payment, epita_email_id, address, emergency_contact_number, emergency_contact_number_name)
+	VALUES (2,'Ali', 'mohamed', 'alimohmad@gmail', 1234567, 24, 8, '5 abc', 123456, 'abc');
+INSERT INTO public.teacher(
+	teacher_id, first_name, last_name, email, contact_number, payment, epita_email_id, address, emergency_contact_number, emergency_contact_number_name)
+	VALUES (3,'mohamed', 'Ali', 'alimohmad@gmail', 1234567, 24, 9, '5 abc', 123456, 'abc');
+
+credentials
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (1, 'abc@epita.fr', 1);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (2, 'vfv@epita.fr', 1);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (3, 'srvggrv@epita.fr', 1);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (4, 'dfvdf@epita.fr', 2);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (5, 'gte@epita.fr', 2);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (6, 'etg@epita.fr', 2);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (7, 'yjrhn@epita.fr', 3);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (8, 'etge@epita.fr', 3);
+INSERT INTO public.credentials(
+	credential_id, email, credential_description_id)
+	VALUES (9, 'etggb@epita.fr', 3);
+	
+credential_descrption
+INSERT INTO public.credential_descrption(
+	credential_description_id, credential_description)
+	VALUES (1, 'administrator');
+INSERT INTO public.credential_descrption(
+	credential_description_id, credential_description)
+	VALUES (2, 'student');
+INSERT INTO public.credential_descrption(
+	credential_description_id, credential_description)
+	VALUES (3, 'teacher');
+	
+	
+group
+INSERT INTO public."group"(
+	group_id, group_discription)
+	VALUES (1, 'group-1');
+INSERT INTO public."group"(
+	group_id, group_discription)
+	VALUES (2, 'group-2');
+INSERT INTO public."group"(
+	group_id, group_discription)
+	VALUES (3, 'specialization');
+	
+intake
+INSERT INTO public.intake(
+	intake_id, intake_description)
+	VALUES (1, 'Spring 2020');
+INSERT INTO public.intake(
+	intake_id, intake_description)
+	VALUES (2, 'Fall 2021');
+INSERT INTO public.intake(
+	intake_id, intake_description)
+	VALUES (3, 'Spring 2021');
+	
+programs	
+INSERT INTO public.programs(
+	program_id, program_description)
+	VALUES (1, 'AI');
+INSERT INTO public.programs(
+	program_id, program_description)
+	VALUES (2, 'SE');
+INSERT INTO public.programs(
+	program_id, program_description)
+	VALUES (3, 'CS');
+INSERT INTO public.programs(
+	program_id, program_description)
+	VALUES (4, 'DB');
+INSERT INTO public.programs(
+	program_id, program_description)
+	VALUES (5, 'ME');
+	
+subjects	
+INSERT INTO public.subjects(
+	subject_id, subject_name)
+	VALUES (1, 'Java');
+INSERT INTO public.subjects(
+	subject_id, subject_name)
+	VALUES (2, 'Relational Database');
+INSERT INTO public.subjects(
+	subject_id, subject_name)
+	VALUES (3, 'Operatins system');
+INSERT INTO public.subjects(
+	subject_id, subject_name)
+	VALUES (4, 'Communication for leaders');
+	

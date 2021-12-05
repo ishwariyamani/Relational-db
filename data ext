@@ -1,0 +1,75 @@
+---List of customers---
+select c.customer_id , c.company_name from customers c ;
+---number of different products---
+select count (p.product_id) as Product_Count from products p;
+--count of employees---
+select count(e.employee_id) as Employee_count from employees e;
+---total revenue---
+select sum (quantity*unit_price*(1-discount))from order_details od ;
+---total revenue for specific year----
+select sum ( quantity * unit_price*(1-discount))from orders left join order_details od on od.order_id=orders.order_id
+where extract (year from orders.order_date)='1996';
+
+---list of countries covered by delivery---
+select distinct ship_country as delivery_country from orders o ; 
+
+---list of available transporters---
+select * from shippers s ;
+select company_name from shippers;
+
+--number of customers per countries---
+select count(c.customer_id) as customers_count,c.country from customers c group by c.country ;
+
+--- the orders from france and belgium---
+select o.order_id , o.ship_country from orders o where o.ship_country = 'France' or o.ship_country = 'Belgium';
+
+---number of orders which are "ordered" but not shipped---
+select count(o.order_id) as count_ordered_notshipped from orders o where o.shipped_date is null ;
+
+---most expensive products---
+SELECT MAX(p.unit_price) AS LargestPrice FROM products p;
+
+select * from products p
+order by p.unit_price desc limit 5;
+
+---list of discontinued products---
+SELECT * FROM products p where p.discontinued IS NOT NULL;
+
+---count of product per category---
+select count(p.product_id),p.category_id from products p group by p.category_id;
+
+---average order price---
+select round(avg(od.unit_price * od.quantity)) from order_details od;
+-- 15. revenue per category
+select sum(od.quantity*od.unit_price*(1-od.discount)), p.category_id, c.category_name from order_details od left join products p on od.product_id = p.product_id 
+left join categories c on p.category_id = c.category_id 
+group by p.category_id, c.category_name;
+
+---16. number of orders per shipper
+select count(o.order_id) as order_count ,o.ship_via, s.company_name from orders o left join shippers s on s.shipper_id = o.ship_via group by ship_via, s.company_name;
+
+-- 17. number of orders per employee
+select count(o.order_id) as order_count ,o.employee_id, e.first_name, e.last_name from orders o left join employees e ON e.employee_id =o.employee_id 
+group by o.employee_id , e.first_name, e.last_name
+
+-- 18. total revenue per supplier
+select sum(od.quantity*od.unit_price*(1-od.discount)), p.supplier_id, s.company_name  from order_details od left join products p on od.product_id = p.product_id 
+left join suppliers s on p.supplier_id = s.supplier_id 
+group by p.supplier_id, s.company_name ;
+
+---18-b. find the total revenue per region
+---if you are trying to get revenue per region based on employee region the result will be inaccurate, 
+---because there is one employee have multiple territory value in employee_territories table
+---so region base gropping is impossible
+select sum(od.quantity*od.unit_price*(1-od.discount)), t.region_id, r.region_description from order_details od 
+left join orders o on od.order_id = o.order_id
+left join employee_territories et on et.employee_id = o.employee_id 
+left join territories t on t.territory_id = et.territory_id 
+left join region r on r.region_id =t.region_id 
+group by t.region_id, r.region_description ;
+
+select sum(od.quantity*od.unit_price*(1-od.discount)),o.ship_region from order_details od 
+left join orders o on od.order_id = o.order_id
+group by o.ship_region; 
+ 
+select  distinct count(1)  from products p;

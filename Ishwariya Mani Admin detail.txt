@@ -1,0 +1,3 @@
+Select A.admin_id,A.first_name,A.last_name,C.email,CD.credential_description From Admins A 
+Left JOIN credentials C ON A.credential_id=C.credential_id 
+Left JOIN credential_descrption CD ON cd.credential_description_id=C.credential_description_id
