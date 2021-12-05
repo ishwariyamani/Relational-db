@@ -1,0 +1,171 @@
+drop table if exists room
+
+
+create table candidates(
+	candidate_name varchar(30),
+	candidate_mailID varchar(30),
+	candidate_ID integer primary key not null,
+	contact_number integer,
+	coursename varchar(30),
+	dob date
+	);
+
+insert into candidates values
+
+('Margarita','margar@epita.com','1','434534634', 'SE', '09/11/2222'),
+('Viki', 'Viki@epita.com','2','43453434', 'Algorithm', '07/11/2002'),
+('Kardashian', 'kardashian@epita.com','3','43453422', 'AI', '07/10/2122'),
+('Nimbu', 'nimbu@epita.com','4','43457634', 'ISM', '09/01/2019')
+
+	create table student(
+	stu_name varchar(30),
+	course_name varchar(30), 
+	stu_ID integer primary key not null,
+	DOB date,
+	candidate_mailID varchar(30)
+	);
+insert into student values
+('Margarita', 'SE', '1', '09/11/2222', 'margar@epita.com'),
+('Viki', 'Alogorithm', '2', '07/11/2002', 'Viki@epita.com'),
+('Kardashian', 'AI', '3', '07/10/2122', 'kardashian@epita.com'),
+('Nimbu', 'ISM', '4', '09/01/2019', 'nimbu@epita.com')
+
+
+create table courses(
+	course_ID integer primary key not null,  
+	course_name varchar(20),
+	intake_type varchar(10)
+);
+insert into courses values
+('777','software engineering', 'spring'),
+('888','ISM','spring'),
+('999','AI', 'fall'),
+('000','cybersecurity','fall')
+ 
+create table teacher (
+ 	teacher_ID integer,
+ 	teacher_name varchar(20),
+ 	teacher_mailID varchar(30) primary key not null,
+ 	subject_name varchar(20),
+ 	account_number integer
+ );
+insert into teacher values
+('01','sam','sam@epita.com','SE','121213'),
+('02','Menin','menin@epita.com','Algorithm','121214'),
+('03','Kevin','kevin@epita.com','ISM','121215'),
+('04','Kim','kim@epita.com','AI','121219')
+
+create table attendance(
+	stu_name varchar(20),
+	status varchar(10),
+	stu_ID integer,
+	teacher_mailID varchar(30),
+	subject_name varchar(20)
+	);
+
+alter table only attendance add constraint fk_stu_ID foreign key (stu_ID) references student;
+
+insert into attendance values
+('Margarita','present', '1','sam@epita.com', 'SE'),
+('Viki', 'present', '2', 'menin@epita.com', 'Alogorithm'),
+('Kardashian', 'absent','3', 'kevin@epita.com', 'AI'),
+('Nimbu', 'present','4','kim@epita.com','ISM')
+ 
+create table salary(
+ 	teacher_ID integer,
+ 	teacher_name varchar(20),
+ 	teacher_mailID varchar(30),
+ 	subject_name varchar(20),
+ 	account_number integer,
+ 	recruitment_type varchar(20)
+ );
+alter table only salary add constraint fk_teacher_mailID foreign key (teacher_mailID) references teacher;
+
+
+insert into salary values
+('01','sam','sam@epita.com','SE','121213','internal'),
+('02','Menin','menin@epita.com','Algorithm','121214','external'),
+('03','Kevin','kevin@epita.com','ISM','121215','internal'),
+('04','Kim','kim@epita.com','AI','121219','external')
+
+create table payment(
+	stu_ID integer,
+	candidate_name varchar(30),
+	candidate_mailID varchar(30),
+	contact_number integer,
+	coursename varchar(30),
+	dob date,
+	payment_ID integer ,
+	mode_of_transfer varchar(20)
+);
+
+alter table only payment add constraint fk_stu_ID foreign key (stu_ID) references student;
+
+insert into payment values
+('1','Margarita','margar@epita.com','434534634', 'SE', '09/11/2222','5432','online'),
+('2','Viki', 'Viki@epita.com','43453434', 'Algorithm', '07/11/2002','5555','offline'),
+('3','Kardashian', 'kardashian@epita.com','43453422', 'AI', '07/10/2122','8787','offline'),
+('4','Nimbu', 'nimbu@epita.com','43457634', 'ISM', '09/01/2019','6565','online')
+
+create table groupe(
+	groupe_name varchar(30),
+	num_of_sessions integer,
+	course_ID integer, 
+	teacher_name varchar(30)
+);
+alter table only groupe add constraint fk_course_ID foreign key (course_ID) references courses;
+
+
+insert into groupe values
+('straw', '20', '777', 'Sam'),
+('bluberry', '15', '888', 'Menin'),
+('lavender', '21', '999', 'Kevin'),
+('lemon', '22', '000', 'Kim')
+
+create table exam(
+	exam_type varchar(20),
+	course_name varchar(20),
+	stu_ID integer,
+	group_name varchar(20),
+	exam_mode varchar(20)
+);
+alter table only exam add constraint fk_stu_ID foreign key (stu_ID) references student;
+
+insert into exam values
+('project', 'SE', '1','lavender','offline'),
+('test', 'Algorithm', '2','lemon','offline'),
+('project', 'AI', '3','blueberry','offline'),
+('project', 'Networking', '4','straw','offline')
+
+create table sessions(
+	sessions_type varchar(10),
+	groupe_name varchar(20),
+	start_time integer,
+	end_time integer,
+	room_no integer,
+	teacher_name varchar(30),
+	course_id integer
+);
+alter table only sessions add constraint fk_room_no foreign key (room_no) references room;
+alter table only sessions add constraint fk_course_id foreign key (course_ID) references courses;
+
+
+insert into sessions values
+('morning','lavender','09','18','600','Sam','777'),
+('afternoon','straw','09','18','601','Kevin','888'),
+('morning','blueberry','20','22','603','Sam','999'),
+('afternoon','lemon','11','13','607','Kevin','000')
+
+create table room(
+	room_no integer primary key not null,
+	block_num integer
+);
+
+insert into room values
+('600','6'),
+('601','8'),
+('603','4'),
+('607','5')
+
+select * from student
+

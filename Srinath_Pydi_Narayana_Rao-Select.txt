@@ -1,0 +1,12 @@
+
+-----To Print the Grade report for each student
+select s.program_id, s.group_id,s.student_id,s.student_name, e.course_id, e.grade from students s 
+left join exams e on s.student_id=e.student_id;
+
+
+---To Print the attendance report for each student
+select s.program_id, s.group_id,s.student_id,s.student_name,a.present_missing,a.session_id from students s 
+left join attendance a on s.student_id=a.student_id;
+
+
+
