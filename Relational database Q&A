@@ -63,3 +63,21 @@ join courses on courses.course_code = grades.grade_course_code_ref
 join students on students.student_epita_email = grades.grade_student_epita_email_ref 
 where course_name = 'Python fundamentals' and grade_score ='19' and student_population_period_ref = 'SPRING' and student_population_year_ref = '2021'
 group by grade_student_epita_email_ref, course_name, student_population_period_ref, student_population_year_ref
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+1) SELECT b.starttime,f.name FROM cd.bookings b 
+left JOIN cd.facilities f ON b.facid = f.facid 
+where f.name like '%Tennis Court%' AND
+date(b.starttime)='2012-09-21'
+order by b.starttime;
+__________________________________________________________________________________________________
+2)How can you output a list of all members who have recommended another member? 
+Ensure that there are no duplicates in the list, and that results are ordered by (surname, firstname).
+
+Select M.Firstname, M.surname from cd.members M 
+inner join (select Distinct  M.recommendedby from cd.members M) t
+ON M.memid= t.recommendedby
+order by surname, firstname;
