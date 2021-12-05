@@ -1,0 +1,65 @@
+1) Get all students who are yet to pay their complete fees
+2) Get all teachers with a study level greater than 6
+3) Get all students from the spring of 2021
+4) Get all DSA students 
+5) Get all students from India
+6) Get all courses for DSA students
+7) Get all grades for Simona Morasca in advanced java programming
+8) Get all project score for Albina Glick in Relational Databases Lab
+9) Get count of students from each country. (Output excepected - India - 34, USA - 12 ...)
+10) Get average score of students from spring 2021 in data exploration and preparation 
+11) Get all sessions between 2nd Jan 2021 8PM to 15th Jan 2021 8PM
+12) Get all on campus sessions for Spring 2021
+14) Get the attendance for Python fundamentals taken on 30th Jan 2021 between 12PM and 4PM (I am not sure if attendance was marked here. But once you solve this you will get the drift)
+15) Get number of students presetn for Python fundamentals taken on 30th Jan 2021 between 12PM and 4PM
+16) Get student who has secured highest marks in Python fundamentals from spring 2021 (Note if there are multiple exams we should get the highest average)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1) select * from students where student_enrollment_status ='selected' or student_enrollment_status ='confirmed'
+2) select * from teachers where teacher_study_level > 6
+3) select * from students where student_population_period_ref = 'SPRING' and student_population_year_ref = '2021'
+4) select * from students where student_population_code_ref = 'DSA'
+5) select * from contacts where contact_country = 'INDIA'
+6) select course_name,program_assignment
+from courses  
+join programs on courses.course_code = programs.program_course_code_ref 
+where program_assignment = 'DSA'
+7) select grade_student_epita_email_ref, course_name, grade_score
+from grades 
+join courses on grades.grade_course_code_ref = courses.course_code 
+where grade_student_epita_email_ref = 'simona.morasca@epita.fr' and course_name = 'advanced java programming'
+8)select grade_student_epita_email_ref, grade_exam_type_ref, grade_score
+from grades 
+join courses on grades.grade_course_code_ref = courses.course_code 
+where grade_student_epita_email_ref = 'albina.glick@epita.fr' and grade_exam_type_ref = 'Project'
+9) select contact_country,count(contact_country)
+from contacts 
+where contact_country = 'USA'
+group by contact_country 
+10)select course_name, student_population_period_ref, student_population_year_ref, avg(grade_score)
+from grades 
+join courses on courses.course_code = grades.grade_course_code_ref 
+join students on students.student_epita_email = grades.grade_student_epita_email_ref 
+where course_name ='data exploration and preparation' and student_population_period_ref ='SPRING' and student_population_year_ref = '2021'
+group by course_name, student_population_period_ref, student_population_year_ref
+11) select * from sessions
+where session_date between '2021-01-02' and '2021-01-15'
+12) select * from sessions 
+where session_type = 'ON-CAMPUS' and session_population_year ='2021' and session_population_period ='SPRING'
+13) select attendance_student_ref, attendance_session_date_ref, attendance_session_start_time, attendance_session_end_time, course_name, attendance_presence
+from attendance 
+join courses on courses.course_code = attendance.attendance_course_ref 
+join sessions on sessions.session_course_ref = attendance.attendance_course_ref 
+where course_name ='Python fundamentals' and attendance_session_date_ref = '2021-03-05' and attendance_session_start_time = '16:00:00' and attendance_session_end_time = '19:00:00'
+14) select course_name, attendance_session_date_ref, count(attendance_presence)
+from attendance 
+join courses on courses.course_code = attendance.attendance_course_ref 
+where course_name = 'Python fundamentals' and attendance_session_date_ref ='2021-01-30'
+group by course_name, attendance_session_date_ref 
+15) select grade_student_epita_email_ref, course_name,student_population_period_ref, student_population_year_ref, max(grade_score)
+from grades 
+join courses on courses.course_code = grades.grade_course_code_ref 
+join students on students.student_epita_email = grades.grade_student_epita_email_ref 
+where course_name = 'Python fundamentals' and grade_score ='19' and student_population_period_ref = 'SPRING' and student_population_year_ref = '2021'
+group by grade_student_epita_email_ref, course_name, student_population_period_ref, student_population_year_ref
