@@ -64,6 +64,27 @@ join students on students.student_epita_email = grades.grade_student_epita_email
 where course_name = 'Python fundamentals' and grade_score ='19' and student_population_period_ref = 'SPRING' and student_population_year_ref = '2021'
 group by grade_student_epita_email_ref, course_name, student_population_period_ref, student_population_year_ref
 
+____________________________________________________________
+--get the student with top grade on each course
+select con.contact_first_name, con.contact_last_name, M.bestScore, M.cname, g2.grade_exam_type_ref 
+from
+	(select c.course_name cname, c.course_code,c.course_rev ,g.grade_exam_type_ref, max(g.grade_score) bestScore 
+	from courses c 
+	left join grades g 
+		on c.course_code = g.grade_course_code_ref 
+			 and c.course_rev = g.grade_course_rev_ref
+	group by c.course_name, g.grade_exam_type_ref ,c.course_code,c.course_rev) M
+inner join grades g2 
+	on M.course_code = g2.grade_course_code_ref 
+			 and M.course_rev = g2.grade_course_rev_ref
+			 and M.bestScore = g2.grade_score 
+			 and M.grade_exam_type_ref = g2.grade_exam_type_ref 
+left join students s 
+	on g2.grade_student_epita_email_ref = s.student_epita_email 
+left join contacts con 
+	on s.student_contact_ref = con.contact_email 
+order by M.cname, g2.grade_exam_type_ref ;
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------------------
