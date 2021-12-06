@@ -81,3 +81,16 @@ Select M.Firstname, M.surname from cd.members M
 inner join (select Distinct  M.recommendedby from cd.members M) t
 ON M.memid= t.recommendedby
 order by surname, firstname;
+_______________________________________
+
+select * from cd.facilities;
+
+How can you retrieve all the information from the cd.facilities table?
+_______________________________________________________________________________________________
+You want to print out a list of all of the facilities and their cost to members. How would you retrieve a list of only facility names and costs?
+select name,membercost from cd.facilities;
+___________________________________________________
+How can you produce a list of the start times for bookings by members named 'David Farrell'?
+select starttime from cd.bookings b left join cd.members m on b.memid=m.memid 
+where m.firstname='David' and m.surname='Farrell';
+_____________________________________________________________
