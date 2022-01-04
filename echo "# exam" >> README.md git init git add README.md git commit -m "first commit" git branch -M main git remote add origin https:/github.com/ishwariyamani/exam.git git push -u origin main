@@ -7,3 +7,8 @@ Example:
 8
 >>> add(10)
 12
+
+def add(a,b):
+  return 𝑎+2×𝑏
+
+print(add(6,2))
