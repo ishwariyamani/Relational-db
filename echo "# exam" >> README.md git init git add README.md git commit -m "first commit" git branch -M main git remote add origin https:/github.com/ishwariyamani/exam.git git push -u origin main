@@ -9,6 +9,6 @@ Example:
 12
 
 def add(a,b):
-  return 𝑎+2×𝑏
+  return (𝑎+(2×𝑏))
 
 print(add(6,2))
