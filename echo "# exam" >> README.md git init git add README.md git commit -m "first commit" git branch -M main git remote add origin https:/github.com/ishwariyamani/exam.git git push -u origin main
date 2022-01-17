@@ -1,14 +1,1 @@
-(1 pt) Create a function add(a, b = 1) that returns the value  𝑎+2×𝑏  given two numbers a and b.
-Example:
 
->>> add(6, 2)
-10
->>> add(10, -1)
-8
->>> add(10)
-12
-
-def add(a,b):
-  return (𝑎+(2×𝑏))
-
-print(add(6,2))
